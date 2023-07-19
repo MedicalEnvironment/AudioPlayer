@@ -29,27 +29,37 @@ ApplicationWindow {
 
             IconButton {
                 text: "⏪️"
-                onClicked: {} // Add logic for rewind
+                onClicked: {
+                    // Add logic for rewind
+                }
             }
 
             IconButton {
                 text: "▶️"
-                onClicked: {} // Add logic for play
+                onClicked: {
+                    // Add logic for play
+                }
             }
 
             IconButton {
                 text: "⏸️"
-                onClicked: {} // Add logic for pause
+                onClicked: {
+                    // Add logic for pause
+                }
             }
 
             IconButton {
                 text: "⏹"
-                onClicked: {} // Add logic for stop
+                onClicked: {
+                    // Add logic for stop
+                }
             }
 
             IconButton {
                 text: "⏩️"
-                onClicked: {} // Add logic for fast playback
+                onClicked: {
+                    // Add logic for fast playback
+                }
             }
         }
     }
