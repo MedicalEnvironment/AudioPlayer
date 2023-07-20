@@ -71,15 +71,3 @@ ApplicationWindow {
         value: 50 // Set the current playback location value
     }
 }
-
-// Custom IconButton component
-Item {
-    property alias text: button.text
-    signal clicked
-
-    Button {
-        id: button
-        text: ""
-        onClicked: parent.clicked()
-    }
-}
