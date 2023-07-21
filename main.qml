@@ -1,73 +1,71 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
+import QtMultimedia 5.12
 
 ApplicationWindow {
     visible: true
-    width: 600
-    height: 400
+    width: 640
+    height: 480
+    title: "Video Player"
 
     Rectangle {
-        id: playerScreen
-        width: parent.width
-        height: parent.height * 0.75
+        anchors.fill: parent
         color: "black"
 
-        Text {
-            anchors.centerIn: parent
-            font.pixelSize: 48
-            text: "Video Player Screen"
+        VideoOutput {
+            id: videoOutput
+            anchors.fill: parent
+            source: mediaPlayer
         }
-    }
 
-    Rectangle {
-        width: parent.width
-        height: parent.height * 0.25
+        MediaPlayer {
+            id: mediaPlayer
+            autoLoad: true
+            autoPlay: false
+            source: "path/to/your/video/file.mp4" // Replace with the actual video file path
+        }
 
-        RowLayout {
-            anchors.centerIn: parent
+        Column {
+            anchors.bottom: parent.bottom
+            spacing: 10
+            padding: 10
 
-            IconButton {
-                text: "⏪️"
-                onClicked: {
-                    // Add logic for rewind
+            Row {
+                spacing: 10
+
+                IconButton {
+                    text: "\u25B6" // Unicode for play symbol ▶️
+                    onClicked: mediaPlayer.play()
+                }
+
+                IconButton {
+                    text: "\u23F8" // Unicode for pause symbol ⏸️
+                    onClicked: mediaPlayer.pause()
+                }
+
+                IconButton {
+                    text: "\u23F9" // Unicode for stop symbol ⏹
+                    onClicked: mediaPlayer.stop()
+                }
+
+                IconButton {
+                    text: "\u23EA" // Unicode for rewind symbol ⏪️
+                    onClicked: mediaPlayer.seek(mediaPlayer.position - 5000) // Seek 5 seconds backward
+                }
+
+                IconButton {
+                    text: "\u23E9" // Unicode for forward symbol ⏩️
+                    onClicked: mediaPlayer.seek(mediaPlayer.position + 5000) // Seek 5 seconds forward
                 }
             }
 
-            IconButton {
-                text: "▶️"
-                onClicked: {
-                    // Add logic for play
-                }
-            }
-
-            IconButton {
-                text: "⏸️"
-                onClicked: {
-                    // Add logic for pause
-                }
-            }
-
-            IconButton {
-                text: "⏹"
-                onClicked: {
-                    // Add logic for stop
-                }
-            }
-
-            IconButton {
-                text: "⏩️"
-                onClicked: {
-                    // Add logic for fast playback
-                }
+            ProgressBar {
+                value: mediaPlayer.position
+                from: 0
+                to: mediaPlayer.duration
+                width: parent.width
+                height: 5
             }
         }
-    }
-
-    ProgressBar {
-        width: parent.width
-        from: 0
-        to: 100
-        value: 50 // Set the current playback location value
     }
 }
