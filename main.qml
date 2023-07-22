@@ -1,70 +1,50 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import QtMultimedia 5.12
 
 ApplicationWindow {
     visible: true
     width: 640
     height: 480
-    title: "Video Player"
 
     Rectangle {
         anchors.fill: parent
         color: "black"
 
-        VideoOutput {
-            id: videoOutput
-            anchors.fill: parent
-            source: mediaPlayer
+        Video {
+            id: videoPlayer
+            anchors.centerIn: parent
+            width: parent.width - 100
+            height: parent.height - 100
+            source: "path_to_your_video_file.mp4" // Replace with the path to your video file
         }
 
-        MediaPlayer {
-            id: mediaPlayer
-            autoLoad: true
-            autoPlay: false
-            source: "path/to/your/video/file.mp4" // Replace with the actual video file path
-        }
-
-        Column {
+        Row {
             anchors.bottom: parent.bottom
-            spacing: 10
-            padding: 10
+            anchors.horizontalCenter: parent.horizontalCenter
 
-            Row {
-                spacing: 10
-
-                IconButton {
-                    text: "\u25B6" // Unicode for play symbol ▶️
-                    onClicked: mediaPlayer.play()
-                }
-
-                IconButton {
-                    text: "\u23F8" // Unicode for pause symbol ⏸️
-                    onClicked: mediaPlayer.pause()
-                }
-
-                IconButton {
-                    text: "\u23F9" // Unicode for stop symbol ⏹
-                    onClicked: mediaPlayer.stop()
-                }
-
-                IconButton {
-                    text: "\u23EA" // Unicode for rewind symbol ⏪️
-                    onClicked: mediaPlayer.seek(mediaPlayer.position - 5000) // Seek 5 seconds backward
-                }
-
-                IconButton {
-                    text: "\u23E9" // Unicode for forward symbol ⏩️
-                    onClicked: mediaPlayer.seek(mediaPlayer.position + 5000) // Seek 5 seconds forward
-                }
+            Button {
+                text: "\u25B6" // Play button symbol (▶️)
+                onClicked: videoPlayer.play()
             }
 
-            ProgressBar {
-                value: mediaPlayer.position
-                from: 0
-                to: mediaPlayer.duration
-                width: parent.width
-                height: 5
+            Button {
+                text: "\u23F8" // Pause button symbol (⏸️)
+                onClicked: videoPlayer.pause()
+            }
+
+            Button {
+                text: "\u23F9" // Stop button symbol (⏹️)
+                onClicked: videoPlayer.stop()
+            }
+
+            Button {
+                text: "\u23EA" // Rewind button symbol (⏪️)
+                onClicked: videoPlayer.seek(videoPlayer.position - 5000)
+            }
+
+            Button {
+                text: "\u23E9" // Forward button symbol (⏩️)
+                onClicked: videoPlayer.seek(videoPlayer.position + 5000)
             }
         }
     }
